@@ -6,7 +6,7 @@ Easy libaray to manage stored data in shared prefreance. will simple lines of co
 Leatest version
 --------
 
-<img src='https://jitpack.io/v/georgesamirmansour/SharedPrefHelper.svg'>
+<img src='https://jitpack.io/v/georgesamirmansour/SharedPreferenceHelper.svg'>
 
 Download
 --------
