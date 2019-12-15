@@ -22,11 +22,28 @@ or Maven:
   <version>1.x</version>
 </dependency>
 ```
-
-
-How to use
 --------
+In order to use it. you need to make class implement InspectableProperty.EnumEntry.
+You can preview sample inside sample package.
+Preview of class below
+--------
+```groovy
+public enum SharedPrefKeys implements InspectableProperty.EnumEntry {
+    userId, sharedName;
 
+    @Override
+    public int value() {
+        return 0;
+    }
+
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
+    }
+}
+```
+
+--------
 You can use any type of mode.
 
 ```groovy
@@ -36,67 +53,55 @@ public class BaseApplication extends Application {
 	@Override
     	public void onCreate() {
         super.onCreate();
-        PrefHelper.setSharedPreferences(getApplicationContext(), "AppSharedPreferenceName",
+        PrefHelper.setSharedPreferences(getApplicationContext(), SharedPrefKeys.sharedName,
                 Context.MODE_PRIVATE);
     	}
 
 }
 
 ```
-
 Example
 --------
 
-simple example of how to use it.
-
-
 ```groovy
-
- 	new PrefHelper().setStringToShared("key", "value");
-
+ 	new PrefHelper().setStringToShared(SharedPrefKeys.userId, "value");
 ```
-
-
 Methods are
 --------
 
 set value to shared
 
 ```groovy
-
-	setIntToShared(String key, int value)
-	setStringToShared (String key, String value) 
-	setBooleanToShared(String key, boolean value)
-	setStringSetToShared(String key, Set<String> value) 
-	setFloatToShared(String key, float value) 
-	setLongToShared(String key, long value)
-
+	setIntToShared(enumKey, int value)
+	setStringToShared (enumKey, String value) 
+	setBooleanToShared(enumKey, boolean value)
+	setStringSetToShared(enumKey, Set<String> value) 
+	setFloatToShared(enumKey, float value) 
+	setLongToShared(enumKey, long value)
 ```
 
 get value from shared
 
 ```groovy
-
-	getIntFromShared(String key) // default value is 0
-	getStringFromShared(String key) // default value is ""
-	getBoolFromShared(String key) // default value is false
-	getStringSetFromShared(String key) // default value is an empty set of string
-	getFloatFromShared(String key) // default value is 0.0f
-	getLongFromShared(String key) // default value is 0
-
+	getIntFromShared(enumKey) // default value is 0
+	getStringFromShared(enumKey) // default value is ""
+	getBoolFromShared(enumKey) // default value is false
+	getStringSetFromShared(enumKey) // default value is an empty set of string
+	getFloatFromShared(enumKey) // default value is 0.0f
+	getLongFromShared(enumKey) // default value is 0
 ```
 
 check if exist or not
 ```groovy
 
-	contain(String key) \\ return boolean
+	contain(enumKey) \\ return boolean
 
 ```
 
 remove from shared
 ```groovy
 
-	remove(String key)
+	remove(enumKey)
 
 ```
 
