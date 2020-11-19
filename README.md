@@ -28,18 +28,11 @@ You can preview sample inside sample package.
 Preview of class below
 --------
 ```groovy
-public enum SharedPrefKeys implements InspectableProperty.EnumEntry {
-    userId, sharedName;
-
-    @Override
-    public int value() {
-        return 0;
-    }
-
-    @Override
-    public Class<? extends Annotation> annotationType() {
-        return null;
-    }
+class SharedPrefKey  {
+   companion object{
+       lateinit var appName: EnumEntry
+           get
+   }
 }
 ```
 
@@ -47,16 +40,13 @@ public enum SharedPrefKeys implements InspectableProperty.EnumEntry {
 You can use any type of mode.
 
 ```groovy
-public class BaseApplication extends Application {
- 
+class BaseApp : Application() {
 
-	@Override
-    	public void onCreate() {
-        super.onCreate();
-        PrefHelper.setSharedPreferences(getApplicationContext(), SharedPrefKeys.sharedName,
-                Context.MODE_PRIVATE);
-    	}
-
+    override fun onCreate() {
+        super.onCreate()
+        PrefHelper.sharedPreferences = getSharedPreferences(SharedPrefKey.appName.name, Context.MODE_PRIVATE)
+        PrefHelper().getIntFromShared(SharedPrefKey.appName)
+    }
 }
 
 ```
@@ -64,12 +54,12 @@ Example
 --------
 
 ```groovy
- 	new PrefHelper().setStringToShared(SharedPrefKeys.userId, "value");
+ 	 PrefHelper().getIntFromShared(SharedPrefKey.appName)
 ```
 Methods are
 --------
 
-set value to shared
+set value to shared 
 
 ```groovy
 	setIntToShared(enumKey, int value)
