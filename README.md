@@ -28,11 +28,8 @@ You can preview sample inside sample package.
 Preview of class below
 --------
 ```groovy
-class SharedPrefKey  {
-   companion object{
-       lateinit var appName: EnumEntry
-           get
-   }
+object SharedPrefKey {
+    lateinit var appName: EnumEntry
 }
 ```
 
@@ -45,6 +42,7 @@ class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         PrefHelper.sharedPreferences = getSharedPreferences(SharedPrefKey.appName.name, Context.MODE_PRIVATE)
+        PrefHelper().getIntFromShared(SharedPrefKey.appName)
     }
 }
 

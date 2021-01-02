@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 group="admt.dev"
-version = 1.3
+version = 1.4
 
 android {
     compileSdkVersion 30
